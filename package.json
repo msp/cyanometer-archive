@@ -1,0 +1,53 @@
+{
+  "name": "cyanometer-archive",
+  "version": "1.0.0",
+  "description": "Navigate the Cyanometer archive",
+  "main": "api.js",
+  "dependencies": {
+    "css-loader": "^0.23.1",
+    "elm": "0.18.0",
+    "elm-test": "0.18.0",
+    "elm-webpack-loader": "^3.0.1",
+    "file-loader": "^0.8.5",
+    "gel-grid": "3.0.2",
+    "gel-sass-tools": "1.2.1",
+    "gel-typography": "2.0.3",
+    "json-server": "^0.8.14",
+    "node-sass": "3.11.2",
+    "node-static": "^0.7.6",
+    "sass-loader": "4.0.2",
+    "sass-mq": "3.3.1",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "devDependencies": {
+    "firebase-tools": "3.1.0",
+    "nodewatch": "0.3.1"
+  },
+  "scripts": {
+    "test": "elm-test",
+    "api": "node api.js",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "guard": "node utils/watcher.js",
+    "dev": "webpack-dev-server --port 3000",
+    "predeploy": "npm run build",
+    "deploy": "firebase deploy",
+    "serve": "static -p ${PORT:-3000} --gzip --host-address 0.0.0.0 dist/",
+    "prestart": "npm run build",
+    "start": "npm run serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msp/cyanometer-archive.git"
+  },
+  "author": "msp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/msp/cyanometer-archive/issues"
+  },
+  "homepage": "https://github.com/msp/cyanometer-archive#readme"
+}

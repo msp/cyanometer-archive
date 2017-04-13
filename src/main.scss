@@ -1,0 +1,577 @@
+$gel-grid-enable--markup-output: true;
+$gel-type-enable--markup-output: true;
+$blue: #0082c8;
+$light-grey: #CCC;
+$grey: #F3F3F3;
+$dark-grey: #646464;
+$red: #c80000;
+$autocomplete-height: 519px;
+$highlight-color: #f4d442;
+
+@import '../node_modules/gel-sass-tools/sass-tools';
+@import '../node_modules/sass-mq/mq';
+@import '../node_modules/gel-grid/grid';
+@import '../node_modules/gel-typography/typography';
+
+// Mixins
+@mixin thing {
+  position: relative;
+  width: 16px;
+  height: 23px;
+  display: inline-block;
+  overflow: hidden;
+  margin-right: 10px;
+  top: 2px;
+}
+
+// Common HTML
+body {
+  margin-top: 0px;
+  font-family: Helvetica, Arial, Sans-serif !important;
+}
+
+H1 {
+  line-height: 1em;
+}
+
+a, a:visited, a:active {
+  text-decoration: none;
+  color: $blue;
+  display: block;
+}
+
+a:hover {
+  color: black;
+}
+
+label, .label-heading {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+span.label-detail {
+  font-size: 14px;
+}
+
+input {
+  width: 98%;
+  height: 36px;
+  font-size: 16px;
+  background-color: $grey;
+  border: 0px;
+  padding-left: 8px;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  vertical-align: sub;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.checkbox {
+  label {
+    font-size: smaller;
+    margin-left: 5px;
+  }
+
+  p {
+    font-size: 16px;
+    margin-left: 25px;
+  }
+}
+
+button, a.button {
+  display: inline;
+  background-color: $blue;
+  border: 0px;
+  padding: 10px;
+  color: white;
+  font-size: 16px;
+  margin-top: 32px;
+  margin-bottom: 16px;
+  margin-right: 32px;
+}
+
+a.button {
+  border-top: 1px solid $blue;
+}
+
+button:hover, a.button:hover, button.delete:hover, button.cancel:hover {
+  background-color: black;
+  cursor: pointer;
+}
+
+button.state.new.disabled:hover,
+button.state.invalid.disabled:hover,
+a.button.state.invalid.disabled:hover,
+button.state.saved.disabled:hover {
+  background-color: $blue;
+}
+
+button.delete.disabled:hover {
+  background-color: $red;
+}
+
+button.disabled:hover,
+a.button.disabled:hover {
+  cursor: default;
+}
+
+button.delete, button.cancel {
+  background-color: $red;
+}
+
+.save-edit button.invalid, .save-new button.invalid {
+  color: white;
+}
+
+
+// Layout
+.container {
+  @include gel-wrap;
+}
+
+header {
+  @include gel-layout;
+  @include gel-typography('pica');
+  background-color: black;
+
+  a, a:visited, a:active {
+    text-decoration: none;
+    color: white;
+  }
+
+  .item {
+    @include gel-layout-item;
+    @include gel-columns(1/12);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bold;
+  }
+}
+
+main {
+  @include gel-typography('pica');
+  border: 0px solid red;
+
+  .stream {
+    h1 {
+      color: $blue;
+    }
+
+    h2 {
+      margin-bottom: 36px;
+    }
+
+    .intro {
+      margin-bottom: 32px;
+    }
+  }
+
+  .stream.edit {
+    h1 {
+      color: black;
+    }
+
+    hr {
+      margin-bottom: 24px;
+    }
+
+    button.add {
+      margin: 0px;
+      margin-left: -30px;
+    }
+
+    button.add-v-two {
+      margin: 0px;
+      margin-left: -30px;
+      background-image: url(/images/Icon_search_v2.svg);
+      width: 30px;
+      height: 38px;
+      padding: 5px;
+      background-repeat: no-repeat;
+      background-position-y: 11px;
+      background-size: 16px;
+      background-position-x: 8px;
+    }
+
+    button.add-v-two.disabled:hover {
+      background-color: $blue;
+    }
+
+    button.delete, button.add-item-v-two {
+      overflow: hidden;
+      margin: 0px;
+      padding: 0px;
+      padding-bottom: 2px;
+      padding-right: 0px;
+      width: 22px;
+      height: 22px;
+      border-radius: 11px;
+      font-weight: bold;
+      margin-top: 5px;
+      text-align: center;
+    }
+
+    button.add-item-v-two {
+      background-color: $blue;
+      margin-right: 5px;
+    }
+
+    button.delete:hover, button.add-item-v-two:hover {
+      background-color: black;
+      cursor: pointer;
+    }
+
+    ul.select-list {
+      background-color: $grey;
+      margin-top: 0px;
+      padding-left: 16px;
+      padding-right: 32px;
+      max-height: $autocomplete-height;
+      overflow: auto;
+      position: relative;
+
+      li {
+        height: 33px;
+        color: black;
+        border-bottom: 1px solid $light-grey;
+        padding-top: 3px;
+        display: flex;
+
+        &:last-child {
+          border-bottom: 0px;
+        }
+      }
+
+      li.text {
+        padding-left: 26px;
+      }
+    }
+  }
+
+  ul {
+    border: 0px solid blue;
+    padding-left: 0px;
+
+    li {
+      color: $blue;
+      line-height: 32px;
+      padding-left: 0px;
+      list-style: none;
+    }
+
+    li.text {
+      color: black;
+      padding-left: 26px;
+    }
+
+    li.stream {
+      margin-left: 16px;
+      padding-left: 0px;
+      border-top: 1px solid #ccc;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $grey;
+      }
+
+      &:last-child {
+        border-bottom: 1px solid #ccc;
+      }
+    }
+
+    li.text a {
+      margin-left: 26px;
+    }
+
+    li.organisation a:before {
+      @include thing;
+      content: url('/images/Icon_organisation.svg');
+    }
+
+    li.person a:before {
+      @include thing;
+      content: url('/images/Icon_person.svg');
+    }
+
+    li.place a:before {
+      @include thing;
+      content: url('/images/Icon_place.svg');
+    }
+
+    li.tag a:before {
+      @include thing;
+      content: url('/images/Icon_tag_v2.svg');
+    }
+  }
+}
+
+footer {
+  @include gel-layout;
+
+  ul {
+    width: 100%;
+    padding-left: 0px;
+  }
+
+  .item {
+    @include gel-layout-item;
+    @include gel-columns(1/12);
+  }
+}
+
+.row {
+  @include gel-layout;
+}
+
+div.state {
+  padding: 8px;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+div.state {
+  a {
+    display: inline;
+    cursor: pointer;
+    font-weight: bold;
+
+
+    &:hover {
+      color: black;
+    }
+  }
+}
+
+div.state.edited {
+  background-color: $blue;
+  border: 1px solid $blue;
+  color: white;
+  a {
+    color: white;
+  }
+}
+
+div.state.invalid {
+  border: 1px solid $dark-grey;
+  color: $dark-grey;
+  a {
+    color: $dark-grey;
+  }
+}
+
+.invalid {
+  color: red;
+}
+
+.invalid-field {
+  color: $red;
+  margin-top: 4px;
+  margin-bottom: 0px;
+  font-size: smaller;
+}
+
+.invalid-input {
+  border: 1px solid $red;
+  outline-width: 0;
+}
+
+span.edited {
+  font-size: smaller;
+  float: right;
+}
+
+// Utils
+.center-aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0px solid red;
+  height: 500px;
+}
+
+
+.margin-top {
+  margin-top: 24px;
+}
+
+.no-margin-top {
+  margin-top: 0px;
+}
+
+.external-links {
+  a, span {
+    display: inline;
+    padding-right: 5px;
+  }
+}
+
+.hidden {
+  visibility: hidden;
+  display: none;
+}
+
+.black {
+  color: black;
+}
+
+.left-margin {
+  margin-left: 20px;
+}
+
+.smaller-font {
+  font-size: smaller;
+}
+
+
+.truncated {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  flex-grow: 2;
+  width: 80%;
+  margin-right: 12px;
+}
+
+.disabled {
+  opacity: 0.4;
+
+  &:hover {
+    cursor: default;
+  }
+}
+
+.centered, .gel-layout__item.centered {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.smaller-font {
+  font-size: smaller;
+}
+
+.help {
+  &:hover {
+    cursor: help;
+  }
+}
+
+@keyframes highlight {
+  0% {
+    background: $highlight-color;
+  }
+  100% {
+    background: none;
+  }
+}
+
+.highlight {
+  animation: highlight 2s;
+  animation-iteration-count: 1;
+}
+
+// Autocomplete
+
+.autocomplete-config {
+  margin-top: 60px;
+  label {
+    font-size: smaller;
+  }
+}
+
+.autocomplete-viewport {
+  height: $autocomplete-height - 38;
+  overflow: auto;
+}
+
+.autocomplete-item {
+  padding: 8px;
+
+  button {
+    float: right;
+  }
+}
+
+.stream.edit {
+  .autocomplete-item-v-two {
+    padding: 2px 0px 2px 0px;
+    border-top: 1px solid $light-grey;
+    display: flex;
+
+    div {
+      padding: 0px;
+    }
+
+    button.add {
+      margin-left: -10px;
+      text-align: center;
+      padding-left: 10px;
+    }
+  }
+
+  .autocomplete-item-v-two.text {
+    padding-left: 26px;
+  }
+}
+
+.autocomplete-item.key-selected {
+  background-color: $highlight-color;
+}
+
+.autocomplete-menu {
+  z-index: 99;
+  background-color: $grey;
+}
+
+ul.autocomplete-list {
+  margin: 0px;
+  padding: 8px 10px 0px 18px;
+  overflow: auto;
+
+  li {
+    color: black;
+  }
+
+  li.autocomplete-item.organisation:before {
+    @include thing;
+    content: url('/images/Icon_organisation.svg');
+  }
+
+  li.autocomplete-item.person:before {
+    @include thing;
+    content: url('/images/Icon_person.svg');
+  }
+
+  li.autocomplete-item.place:before {
+    @include thing;
+    content: url('/images/Icon_place.svg');
+  }
+
+  li.autocomplete-item.tag:before {
+    @include thing;
+    content: url('/images/Icon_tag_v2.svg');
+  }
+
+  li.autocomplete-item.text {
+    padding-left: 34px
+  }
+
+}
+
+.thing-autocomplete, .source-autocomplete {
+  border: 0px solid grey;
+  min-height: $autocomplete-height;
+  svg {
+    height: 50px;
+  }
+
+  .center-aligner {
+    height: 100px;
+  }
+}
