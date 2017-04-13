@@ -27,7 +27,7 @@ listImages endpoint =
 
 imagesUrl : String -> String
 imagesUrl endpoint =
-    String.trim (Regex.replace Regex.All (Regex.regex "\"") (\_ -> "") endpoint)
+    String.trim (Regex.replace Regex.All (Regex.regex "\"") (\_ -> "") endpoint) ++ "?count=" ++ Constants.imageCount
 
 
 imagesDecoder : Decode.Decoder (List Image)
