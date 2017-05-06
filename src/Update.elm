@@ -1,6 +1,6 @@
 module Update exposing (..)
 
-import Commands exposing (listImages)
+import Commands exposing (defaultToDate, listImages)
 import Date
 import Date.Extra.Duration
 import DateUtils exposing (monthAsInt)
@@ -28,6 +28,27 @@ update msg model =
             )
 
         OnListImages (Err error) ->
+            parseHttpError error model
+
+        OnListLocations (Ok newLocations) ->
+            let
+                newCurrentLocation =
+                    case List.head newLocations of
+                        Just location ->
+                            location
+
+                        Nothing ->
+                            model.currentLocation
+            in
+                ( { model
+                    | locations = newLocations
+                    , currentLocation = newCurrentLocation
+                    , loading = False
+                  }
+                , defaultToDate
+                )
+
+        OnListLocations (Err error) ->
             parseHttpError error model
 
         OnLocationChange location ->
@@ -164,6 +185,30 @@ update msg model =
 
                 _ ->
                     ( model, Cmd.none )
+
+        UpdateCurrentLocation newLocationId ->
+            let
+                maybeNewLocation =
+                    List.filter (\l -> (toString <| l.id) == newLocationId) model.locations
+                        |> List.head
+
+                newLocation =
+                    case maybeNewLocation of
+                        Just location ->
+                            location
+
+                        Nothing ->
+                            model.currentLocation
+
+                updatedModel =
+                    { model
+                        | currentLocation = newLocation
+                        , loading = True
+                    }
+            in
+                ( updatedModel
+                , listImages updatedModel
+                )
 
         NoOp ->
             ( model, Cmd.none )

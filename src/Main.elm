@@ -5,10 +5,9 @@ import Messages exposing (Msg(..))
 import Models exposing (Model, Endpoint, initialModel)
 import View exposing (view)
 import Update exposing (update)
-import Commands exposing (defaultToDate, listImages)
+import Commands exposing (defaultToDate, listImages, listLocations)
 import Routing exposing (Route)
 import Navigation exposing (Location)
-import Ports exposing (receiveConfirmFromJs)
 
 
 init : Flags -> Location -> ( Model, Cmd Msg )
@@ -17,10 +16,10 @@ init flags location =
         currentRoute =
             Routing.parseLocation location
 
-        initModel =
+        firstModel =
             initialModel currentRoute flags.endpoint
     in
-        ( initModel, defaultToDate )
+        ( firstModel, listLocations firstModel )
 
 
 subscriptions : Model -> Sub Msg

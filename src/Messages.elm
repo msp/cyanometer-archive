@@ -1,15 +1,16 @@
 module Messages exposing (..)
 
 import Date exposing (Date)
-import Navigation exposing (Location)
-import Models exposing (Image)
+import Models exposing (Image, Location)
 import Http
+import Navigation
 
 
 type Msg
-    = OnLocationChange Location
+    = OnLocationChange Navigation.Location
     | NoOp
     | OnListImages (Result Http.Error (List Image))
+    | OnListLocations (Result Http.Error (List Models.Location))
     | DefaultToDate (Maybe Date)
     | UpdateToDateDay String
     | UpdateToDateMonth String
@@ -17,4 +18,5 @@ type Msg
     | UpdateFromDateDay String
     | UpdateFromDateMonth String
     | UpdateFromDateYear String
+    | UpdateCurrentLocation String
     | UpdateImages

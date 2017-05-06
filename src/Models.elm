@@ -13,6 +13,8 @@ type alias Model =
     , route : Routing.Route
     , endpoint : Endpoint
     , images : List Image
+    , locations : List Location
+    , currentLocation : Location
     , fromDate : Date
     , toDate : Date
     }
@@ -34,6 +36,8 @@ initialModel route endpoint =
     , route = route
     , endpoint = endpoint
     , images = []
+    , locations = []
+    , currentLocation = newLocation
     , fromDate = defaultDate
     , toDate = defaultDate
     }
@@ -47,10 +51,27 @@ type alias Image =
     }
 
 
+type alias Location =
+    { id : Int
+    , place : String
+    , country : String
+    , city : String
+    }
+
+
 newImage : Image
 newImage =
     { id = -1
     , s3_url = ""
     , taken_at = ""
     , blueness_index = ""
+    }
+
+
+newLocation : Location
+newLocation =
+    { id = -1
+    , place = ""
+    , country = ""
+    , city = ""
     }

@@ -44,7 +44,8 @@ imagesView : Model -> Html Msg
 imagesView model =
     div [ class "animated fadeIn" ]
         [ h1 [ class "" ] [ text ("Showing " ++ (toString (List.length model.images)) ++ " archive images between:") ]
-          --        , debug model
+        , renderLocations model
+        , br [] []
         , renderDate model.fromDate model "from"
         , renderDate model.toDate model "to"
         , renderPie model
@@ -76,6 +77,18 @@ debug model =
         ]
 
 
+renderLocationOption : Location -> Int -> Html Msg
+renderLocationOption location current =
+    let
+        label =
+            location.country ++ ", " ++ location.city ++ ", " ++ location.place
+
+        isSelected =
+            (location.id == current)
+    in
+        option [ value (toString <| location.id), selected isSelected ] [ text label ]
+
+
 renderDateOption : Int -> Int -> Int -> Html Msg
 renderDateOption val label current =
     let
@@ -96,6 +109,13 @@ renderDateOption val label current =
 yearRange : Model -> List Int
 yearRange model =
     List.range (Date.year <| Models.defaultDate) (Date.year <| model.toDate)
+
+
+renderLocations : Model -> Html Msg
+renderLocations model =
+    div []
+        [ select [ class "", onChange UpdateCurrentLocation ] (List.map (\l -> renderLocationOption l model.currentLocation.id) model.locations)
+        ]
 
 
 renderDate : Date -> Model -> String -> Html Msg
@@ -165,5 +185,6 @@ annular arcs indicies_s =
             ]
 
 
+onChange : (String -> value) -> Attribute value
 onChange tagger =
     on "change" (Json.map tagger targetValue)

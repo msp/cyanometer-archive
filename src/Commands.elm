@@ -8,7 +8,7 @@ import Json.Decode as Decode exposing (field)
 import Json.Decode.Extra exposing ((|:))
 import Time
 import Messages exposing (Msg(..))
-import Models exposing (Image, Model)
+import Models exposing (Image, Location, Model)
 import Regex
 import Task
 
@@ -33,10 +33,27 @@ listImages model =
         |> Http.send OnListImages
 
 
+listLocations : Model -> Cmd Msg
+listLocations model =
+    Http.request
+        { method = "GET"
+        , headers = []
+        , url = locationsUrl model
+        , body = Http.emptyBody
+        , expect =
+            Http.expectJson locationsDecoder
+        , timeout = Just <| Time.inMilliseconds Constants.networkTimeoutMS
+        , withCredentials = False
+        }
+        |> Http.send OnListLocations
+
+
 imagesUrl : Model -> String
 imagesUrl model =
-    String.trim (Regex.replace Regex.All (Regex.regex "\"") (\_ -> "") model.endpoint)
-        ++ "?count="
+    rootEndpoint model
+        ++ "api/locations/"
+        ++ toString (model.currentLocation.id)
+        ++ "/images?count="
         ++ Constants.imageCount
         ++ "&sday="
         ++ toString (Date.day model.fromDate)
@@ -52,6 +69,17 @@ imagesUrl model =
         ++ toString (Date.year model.toDate)
 
 
+locationsUrl : Model -> String
+locationsUrl model =
+    rootEndpoint model
+        ++ "api/locations/"
+
+
+rootEndpoint : Model -> String
+rootEndpoint model =
+    String.trim (Regex.replace Regex.All (Regex.regex "\"") (\_ -> "") model.endpoint)
+
+
 imagesDecoder : Decode.Decoder (List Image)
 imagesDecoder =
     Decode.list imageDecoder
@@ -65,3 +93,18 @@ imageDecoder =
         |: (field "s3_url" Decode.string)
         |: (field "taken_at" Decode.string)
         |: (field "blueness_index" Decode.string)
+
+
+locationsDecoder : Decode.Decoder (List Location)
+locationsDecoder =
+    Decode.list locationDecoder
+
+
+locationDecoder : Decode.Decoder Location
+locationDecoder =
+    Decode.succeed
+        Location
+        |: (field "id" Decode.int)
+        |: (field "place" Decode.string)
+        |: (field "country" Decode.string)
+        |: (field "city" Decode.string)

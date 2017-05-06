@@ -1,147 +1,192 @@
 {
-	"images": [{
-		"taken_at": "2017-03-31T17:17:34",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-19_17_34-large.jpg",
-		"location_id": 1,
-		"id": 10917,
-		"blueness_index": "25"
-	}, {
-		"taken_at": "2017-03-31T17:01:57",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-19_01_57-large.jpg",
-		"location_id": 1,
-		"id": 10916,
-		"blueness_index": "25"
-	}, {
-		"taken_at": "2017-03-31T16:46:21",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-18_46_21-large.jpg",
-		"location_id": 1,
-		"id": 10915,
-		"blueness_index": "23"
-	}, {
-		"taken_at": "2017-03-31T16:30:47",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-18_30_47-large.jpg",
-		"location_id": 1,
-		"id": 10914,
-		"blueness_index": "22"
-	}, {
-		"taken_at": "2017-03-31T16:15:10",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-18_15_10-large.jpg",
-		"location_id": 1,
-		"id": 10913,
-		"blueness_index": "22"
-	}, {
-		"taken_at": "2017-03-31T15:59:35",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-17_59_35-large.jpg",
-		"location_id": 1,
-		"id": 10912,
-		"blueness_index": "22"
-	}, {
-		"taken_at": "2017-03-31T15:43:54",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-17_43_54-large.jpg",
-		"location_id": 1,
-		"id": 10911,
-		"blueness_index": "21"
-	}, {
-		"taken_at": "2017-03-31T15:28:19",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-17_28_19-large.jpg",
-		"location_id": 1,
-		"id": 10910,
-		"blueness_index": "22"
-	}, {
-		"taken_at": "2017-03-31T15:12:43",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-17_12_43-large.jpg",
-		"location_id": 1,
-		"id": 10909,
-		"blueness_index": "22"
-	}, {
-		"taken_at": "2017-03-31T14:57:04",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-16_57_04-large.jpg",
-		"location_id": 1,
-		"id": 10908,
-		"blueness_index": "22"
-	}, {
-		"taken_at": "2017-03-31T14:41:28",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-16_41_28-large.jpg",
-		"location_id": 1,
-		"id": 10907,
-		"blueness_index": "23"
-	}, {
-		"taken_at": "2017-03-31T14:25:52",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-16_25_52-large.jpg",
-		"location_id": 1,
-		"id": 10906,
-		"blueness_index": "22"
-	}, {
-		"taken_at": "2017-03-31T14:10:16",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-16_10_16-large.jpg",
-		"location_id": 1,
-		"id": 10905,
-		"blueness_index": "22"
-	}, {
-		"taken_at": "2017-03-31T13:54:37",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-15_54_37-large.jpg",
-		"location_id": 1,
-		"id": 10904,
-		"blueness_index": "22"
-	}, {
-		"taken_at": "2017-03-31T13:39:01",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-15_39_01-large.jpg",
-		"location_id": 1,
-		"id": 10903,
-		"blueness_index": "22"
-	}, {
-		"taken_at": "2017-03-31T13:23:21",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-15_23_21-large.jpg",
-		"location_id": 1,
-		"id": 10902,
-		"blueness_index": "22"
-	}, {
-		"taken_at": "2017-03-31T13:07:38",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-15_07_38-large.jpg",
-		"location_id": 1,
-		"id": 10901,
-		"blueness_index": "22"
-	}, {
-		"taken_at": "2017-03-31T12:52:04",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-14_52_04-large.jpg",
-		"location_id": 1,
-		"id": 10900,
-		"blueness_index": "22"
-	}, {
-		"taken_at": "2017-03-31T12:36:23",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-14_36_23-large.jpg",
-		"location_id": 1,
-		"id": 10899,
-		"blueness_index": "22"
-	}, {
-		"taken_at": "2017-03-31T12:20:43",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-14_20_43-large.jpg",
-		"location_id": 1,
-		"id": 10898,
-		"blueness_index": "21"
-	}, {
-		"taken_at": "2017-03-31T12:05:10",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-14_05_10-large.jpg",
-		"location_id": 1,
-		"id": 10897,
-		"blueness_index": "22"
-	}, {
-		"taken_at": "2017-03-31T11:49:33",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-13_49_33-large.jpg",
-		"location_id": 1,
-		"id": 10896,
-		"blueness_index": "22"
-	}, {
-		"taken_at": "2017-03-31T11:31:41",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-13_31_41-large.jpg",
-		"location_id": 1,
-		"id": 10895,
-		"blueness_index": "22"
-	}, {
-		"taken_at": "2017-03-31T10:57:56",
-		"s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-12_57_56-large.jpg",
-		"location_id": 1,
-		"id": 10894,
-		"blueness_index": "23"
-	}]
+  "locations": [
+    {
+      "place": "Town Square",
+      "id": 1,
+      "country": "Slovenia",
+      "city": "Ljubljana"
+    },
+    {
+      "place": "Matt Test",
+      "id": 2,
+      "country": "UK",
+      "city": "London"
+    },
+    {
+      "place": "Town Square",
+      "id": 3,
+      "country": "Poland",
+      "city": "Wroclaw"
+    }
+  ],
+  "images": [
+    {
+      "taken_at": "2017-03-31T17:17:34",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-19_17_34-large.jpg",
+      "location_id": 1,
+      "id": 10917,
+      "blueness_index": "25"
+    },
+    {
+      "taken_at": "2017-03-31T17:01:57",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-19_01_57-large.jpg",
+      "location_id": 1,
+      "id": 10916,
+      "blueness_index": "25"
+    },
+    {
+      "taken_at": "2017-03-31T16:46:21",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-18_46_21-large.jpg",
+      "location_id": 1,
+      "id": 10915,
+      "blueness_index": "23"
+    },
+    {
+      "taken_at": "2017-03-31T16:30:47",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-18_30_47-large.jpg",
+      "location_id": 1,
+      "id": 10914,
+      "blueness_index": "22"
+    },
+    {
+      "taken_at": "2017-03-31T16:15:10",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-18_15_10-large.jpg",
+      "location_id": 1,
+      "id": 10913,
+      "blueness_index": "22"
+    },
+    {
+      "taken_at": "2017-03-31T15:59:35",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-17_59_35-large.jpg",
+      "location_id": 1,
+      "id": 10912,
+      "blueness_index": "22"
+    },
+    {
+      "taken_at": "2017-03-31T15:43:54",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-17_43_54-large.jpg",
+      "location_id": 1,
+      "id": 10911,
+      "blueness_index": "21"
+    },
+    {
+      "taken_at": "2017-03-31T15:28:19",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-17_28_19-large.jpg",
+      "location_id": 1,
+      "id": 10910,
+      "blueness_index": "22"
+    },
+    {
+      "taken_at": "2017-03-31T15:12:43",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-17_12_43-large.jpg",
+      "location_id": 1,
+      "id": 10909,
+      "blueness_index": "22"
+    },
+    {
+      "taken_at": "2017-03-31T14:57:04",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-16_57_04-large.jpg",
+      "location_id": 1,
+      "id": 10908,
+      "blueness_index": "22"
+    },
+    {
+      "taken_at": "2017-03-31T14:41:28",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-16_41_28-large.jpg",
+      "location_id": 1,
+      "id": 10907,
+      "blueness_index": "23"
+    },
+    {
+      "taken_at": "2017-03-31T14:25:52",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-16_25_52-large.jpg",
+      "location_id": 1,
+      "id": 10906,
+      "blueness_index": "22"
+    },
+    {
+      "taken_at": "2017-03-31T14:10:16",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-16_10_16-large.jpg",
+      "location_id": 1,
+      "id": 10905,
+      "blueness_index": "22"
+    },
+    {
+      "taken_at": "2017-03-31T13:54:37",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-15_54_37-large.jpg",
+      "location_id": 1,
+      "id": 10904,
+      "blueness_index": "22"
+    },
+    {
+      "taken_at": "2017-03-31T13:39:01",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-15_39_01-large.jpg",
+      "location_id": 1,
+      "id": 10903,
+      "blueness_index": "22"
+    },
+    {
+      "taken_at": "2017-03-31T13:23:21",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-15_23_21-large.jpg",
+      "location_id": 1,
+      "id": 10902,
+      "blueness_index": "22"
+    },
+    {
+      "taken_at": "2017-03-31T13:07:38",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-15_07_38-large.jpg",
+      "location_id": 1,
+      "id": 10901,
+      "blueness_index": "22"
+    },
+    {
+      "taken_at": "2017-03-31T12:52:04",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-14_52_04-large.jpg",
+      "location_id": 1,
+      "id": 10900,
+      "blueness_index": "22"
+    },
+    {
+      "taken_at": "2017-03-31T12:36:23",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-14_36_23-large.jpg",
+      "location_id": 1,
+      "id": 10899,
+      "blueness_index": "22"
+    },
+    {
+      "taken_at": "2017-03-31T12:20:43",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-14_20_43-large.jpg",
+      "location_id": 1,
+      "id": 10898,
+      "blueness_index": "21"
+    },
+    {
+      "taken_at": "2017-03-31T12:05:10",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-14_05_10-large.jpg",
+      "location_id": 1,
+      "id": 10897,
+      "blueness_index": "22"
+    },
+    {
+      "taken_at": "2017-03-31T11:49:33",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-13_49_33-large.jpg",
+      "location_id": 1,
+      "id": 10896,
+      "blueness_index": "22"
+    },
+    {
+      "taken_at": "2017-03-31T11:31:41",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-13_31_41-large.jpg",
+      "location_id": 1,
+      "id": 10895,
+      "blueness_index": "22"
+    },
+    {
+      "taken_at": "2017-03-31T10:57:56",
+      "s3_url": "https://s3.eu-central-1.amazonaws.com/cyanometer/sky-31.03.2017-12_57_56-large.jpg",
+      "location_id": 1,
+      "id": 10894,
+      "blueness_index": "23"
+    }
+  ]
 }
