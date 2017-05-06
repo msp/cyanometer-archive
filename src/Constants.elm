@@ -19,7 +19,7 @@ screenHeight =
 
 imageCount : String
 imageCount =
-    "500"
+    "10000"
 
 
 colors : Array String

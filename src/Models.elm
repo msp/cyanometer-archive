@@ -1,6 +1,6 @@
 module Models exposing (..)
 
-import Date exposing (Date)
+import Date exposing (Date, fromString, fromTime)
 import Routing
 
 
@@ -13,9 +13,19 @@ type alias Model =
     , route : Routing.Route
     , endpoint : Endpoint
     , images : List Image
-    , fromDate : Maybe Date
-    , toDate : Maybe Date
+    , fromDate : Date
+    , toDate : Date
     }
+
+
+defaultDate : Date
+defaultDate =
+    case fromString "01 01 2016" of
+        Ok date ->
+            date
+
+        _ ->
+            fromTime 0
 
 
 initialModel : Routing.Route -> Endpoint -> Model
@@ -24,8 +34,8 @@ initialModel route endpoint =
     , route = route
     , endpoint = endpoint
     , images = []
-    , fromDate = Nothing
-    , toDate = Nothing
+    , fromDate = defaultDate
+    , toDate = defaultDate
     }
 
 

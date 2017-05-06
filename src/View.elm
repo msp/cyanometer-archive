@@ -1,8 +1,10 @@
 module View exposing (..)
 
-import Date
+import Date exposing (Date, fromString, fromTime)
+import DateUtils exposing (daysInMonth, monthAsInt)
 import Html exposing (..)
-import Html.Attributes exposing (class, id, href)
+import Html.Attributes exposing (class, href, id, selected, value)
+import Html.Events exposing (on, onClick, targetValue)
 import Visualization.Shape as Shape exposing (defaultPieConfig, Arc)
 import Visualization.Path as Path
 import Array exposing (Array)
@@ -13,6 +15,7 @@ import Messages exposing (Msg(..))
 import Models exposing (..)
 import Routing exposing (Route(..))
 import Spinner
+import Json.Decode as Json
 
 
 view : Model -> Html Msg
@@ -24,12 +27,7 @@ page : Model -> Html Msg
 page model =
     case model.route of
         ImagesRoute ->
-            case model.loading of
-                True ->
-                    Spinner.render
-
-                False ->
-                    imagesView model
+            imagesView model
 
         NotFoundRoute ->
             notFoundView model
@@ -44,35 +42,88 @@ notFoundView model =
 
 imagesView : Model -> Html Msg
 imagesView model =
+    div [ class "animated fadeIn" ]
+        [ h1 [ class "" ] [ text ("Showing " ++ (toString (List.length model.images)) ++ " archive images between:") ]
+          --        , debug model
+        , renderDate model.fromDate model "from-date"
+        , renderDate model.toDate model "to-date"
+        , renderPie model
+          -- , ul [ class "gel-layout" ] (List.map imageRow (List.sortBy .taken_at model.images))
+        ]
+
+
+renderPie : Model -> Html Msg
+renderPie model =
     let
         pieData =
             List.map (\n -> 1) (List.map .blueness_index model.images) |> Shape.pie { defaultPieConfig | outerRadius = radius }
     in
-        div [ class "animated fadeIn" ]
-            [ h1 [ class "" ] [ text ("Latest images: " ++ Constants.imageCount) ]
-            , svg [ width (toString screenWidth ++ "px"), height (toString screenHeight ++ "px") ]
-                [ annular pieData (List.map .blueness_index model.images)
-                ]
-              -- , ul [ class "gel-layout" ] (List.map imageRow (List.sortBy .taken_at model.images))
-            , div [] [ text <| "(Optional) date at program launch was " ++ dateString model ]
+        case model.loading of
+            True ->
+                Spinner.render
+
+            False ->
+                svg [ width (toString screenWidth ++ "px"), height (toString screenHeight ++ "px") ]
+                    [ annular pieData (List.map .blueness_index model.images)
+                    ]
+
+
+debug : Model -> Html Msg
+debug model =
+    div []
+        [ div [] [ text <| toString <| model.fromDate ]
+        , div [] [ text <| toString <| model.toDate ]
+        ]
+
+
+renderDateOption : Int -> Int -> Int -> Html Msg
+renderDateOption val label current =
+    let
+        isSelected =
+            (val == current)
+
+        className =
+            case isSelected of
+                True ->
+                    "selected"
+
+                False ->
+                    ""
+    in
+        option [ value (toString <| val), selected isSelected, class className ] [ text (toString <| label) ]
+
+
+yearRange : Model -> List Int
+yearRange model =
+    List.range (Date.year <| model.fromDate) (Date.year <| model.toDate)
+
+
+renderDate : Date -> Model -> String -> Html Msg
+renderDate date model tag =
+    let
+        currentDay =
+            Date.day date
+
+        currentMonth =
+            monthAsInt <| Date.month date
+
+        currentYear =
+            Date.year date
+
+        lastDayInMonth =
+            daysInMonth date
+
+        ( dayTagger, monthTagger, yearTagger ) =
+            if tag == "to-date" then
+                ( UpdateToDateDay, UpdateToDateMonth, UpdateToDateYear )
+            else
+                ( UpdateFromDateDay, UpdateFromDateMonth, UpdateFromDateYear )
+    in
+        div []
+            [ select [ class <| toString tag, onChange dayTagger ] (List.map (\d -> renderDateOption d d currentDay) (List.range 1 lastDayInMonth))
+            , select [ class <| toString tag, onChange monthTagger ] (List.map (\m -> renderDateOption m m currentMonth) (List.range 1 12))
+            , select [ class <| toString tag, onChange yearTagger ] (List.map (\y -> renderDateOption y y currentYear) (yearRange model))
             ]
-
-
-dateString : Model -> String
-dateString model =
-    case model.toDate of
-        Nothing ->
-            "No to date here"
-
-        Just date ->
-            "the date is "
-                ++ (toString <| Date.dayOfWeek date)
-                ++ " "
-                ++ (toString <| Date.day date)
-                ++ " "
-                ++ (toString <| Date.month date)
-                ++ " "
-                ++ (toString <| Date.year date)
 
 
 imageRow : Image -> Html Msg
@@ -111,3 +162,7 @@ annular arcs indicies_s =
             [ g [] <| List.indexedMap makeSlice arcs
               -- , g [] <| List.map makeDot arcs
             ]
+
+
+onChange tagger =
+    on "change" (Json.map tagger targetValue)

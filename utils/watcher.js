@@ -6,6 +6,7 @@ watch
   .add('./tests/Main.elm')
   .add('./tests/Tests.elm')
   .add('./tests/StringUtilsTests.elm')
+  .add('./tests/DateUtilsTests.elm')
   .add('./utils', true)
   .onChange(function(file, prev, curr, action) {
     console.log(file+' changed.. '+action);

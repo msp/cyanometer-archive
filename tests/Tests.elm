@@ -1,5 +1,6 @@
 module Tests exposing (..)
 
+import DateUtilsTests
 import Test exposing (..)
 import StringUtilsTests
 
@@ -7,6 +8,7 @@ import StringUtilsTests
 tests : List (List Test)
 tests =
     [ StringUtilsTests.all
+    , DateUtilsTests.all
     ]
 
 
