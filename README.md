@@ -20,7 +20,7 @@ In one terminal run the webpack dev server which defaults to the fake, embedded 
 npm run dev
 ```
 
-Or choose an API (the Cyanometer API [source is here](https://github.com/msp/cyanometer))
+Or choose an API (the Cyanometer API source is [msp/cyanometer](https://github.com/msp/cyanometer))
 
 ```
 # fake, embedded
@@ -28,7 +28,7 @@ npm run api
 open http://localhost:4000
 
 # local API
-API_ENDPOINT=http://localhost:4000/api/locations/1/images/ npm run dev
+API_ENDPOINT=http://localhost:4000/images/ npm run dev
 
 # staging
 API_ENDPOINT=https://cyanometer-staging.herokuapp.com/api/locations/1/images/ npm run dev
@@ -47,6 +47,8 @@ Elm is whitespace sensitive so I've been using [elm-format](https://atom.io/pack
 
 
 ## Staging
+
+#### Deploy
 
 ```
 API_ENDPOINT=https://cyanometer-staging.herokuapp.com/api/locations/1/images/ npm run deploy
