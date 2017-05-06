@@ -2,6 +2,7 @@ module Update exposing (..)
 
 import Commands exposing (listImages)
 import Date
+import Date.Extra.Duration
 import DateUtils exposing (monthAsInt)
 import Messages exposing (Msg(..))
 import Models exposing (Model)
@@ -48,7 +49,11 @@ update msg model =
                 Just date ->
                     let
                         updatedModel =
-                            { model | toDate = date, loading = True }
+                            { model
+                                | toDate = date
+                                , fromDate = Date.Extra.Duration.add Date.Extra.Duration.Month -2 date
+                                , loading = True
+                            }
                     in
                         ( updatedModel
                         , listImages updatedModel

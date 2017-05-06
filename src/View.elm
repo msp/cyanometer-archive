@@ -45,8 +45,8 @@ imagesView model =
     div [ class "animated fadeIn" ]
         [ h1 [ class "" ] [ text ("Showing " ++ (toString (List.length model.images)) ++ " archive images between:") ]
           --        , debug model
-        , renderDate model.fromDate model "from-date"
-        , renderDate model.toDate model "to-date"
+        , renderDate model.fromDate model "from"
+        , renderDate model.toDate model "to"
         , renderPie model
           -- , ul [ class "gel-layout" ] (List.map imageRow (List.sortBy .taken_at model.images))
         ]
@@ -95,7 +95,7 @@ renderDateOption val label current =
 
 yearRange : Model -> List Int
 yearRange model =
-    List.range (Date.year <| model.fromDate) (Date.year <| model.toDate)
+    List.range (Date.year <| Models.defaultDate) (Date.year <| model.toDate)
 
 
 renderDate : Date -> Model -> String -> Html Msg
@@ -114,13 +114,14 @@ renderDate date model tag =
             daysInMonth date
 
         ( dayTagger, monthTagger, yearTagger ) =
-            if tag == "to-date" then
+            if tag == "to" then
                 ( UpdateToDateDay, UpdateToDateMonth, UpdateToDateYear )
             else
                 ( UpdateFromDateDay, UpdateFromDateMonth, UpdateFromDateYear )
     in
         div []
-            [ select [ class <| toString tag, onChange dayTagger ] (List.map (\d -> renderDateOption d d currentDay) (List.range 1 lastDayInMonth))
+            [ label [ class "date-select" ] [ text tag ]
+            , select [ class <| toString tag, onChange dayTagger ] (List.map (\d -> renderDateOption d d currentDay) (List.range 1 lastDayInMonth))
             , select [ class <| toString tag, onChange monthTagger ] (List.map (\m -> renderDateOption m m currentMonth) (List.range 1 12))
             , select [ class <| toString tag, onChange yearTagger ] (List.map (\y -> renderDateOption y y currentYear) (yearRange model))
             ]
@@ -158,7 +159,7 @@ annular arcs indicies_s =
         makeDot datum =
             path [ d dot, transform ("translate" ++ toString (Shape.centroid { datum | innerRadius = radius - 60 })) ] []
     in
-        g [ transform ("translate(" ++ toString (3 * radius + 20) ++ "," ++ toString radius ++ ")") ]
+        g [ transform ("translate(" ++ toString (2 * radius + 20) ++ "," ++ toString radius ++ ")") ]
             [ g [] <| List.indexedMap makeSlice arcs
               -- , g [] <| List.map makeDot arcs
             ]
