@@ -1,10 +1,12 @@
 module Update exposing (..)
 
+import Date
 import Messages exposing (Msg(..))
 import Models exposing (Model)
 import Ports exposing (..)
 import Routing exposing (parseLocation)
 import Http
+import Task
 
 
 update : Messages.Msg -> Model -> ( Model, Cmd Messages.Msg )
@@ -16,7 +18,7 @@ update msg model =
                 | images = newImages
                 , loading = False
               }
-            , Cmd.none
+            , Task.perform (Just >> SetToDate) Date.now
             )
 
         OnListImages (Err error) ->
@@ -35,6 +37,14 @@ update msg model =
                         scrollPageTop "ignored"
             in
                 ( { model | route = newRoute }, cmd )
+
+        SetToDate date ->
+            ( { model
+                | toDate = date
+                , loading = False
+              }
+            , Cmd.none
+            )
 
         NoOp ->
             ( model, Cmd.none )

@@ -1,5 +1,6 @@
 module View exposing (..)
 
+import Date
 import Html exposing (..)
 import Html.Attributes exposing (class, id, href)
 import Visualization.Shape as Shape exposing (defaultPieConfig, Arc)
@@ -53,7 +54,25 @@ imagesView model =
                 [ annular pieData (List.map .blueness_index model.images)
                 ]
               -- , ul [ class "gel-layout" ] (List.map imageRow (List.sortBy .taken_at model.images))
+            , div [] [ text <| "(Optional) date at program launch was " ++ dateString model ]
             ]
+
+
+dateString : Model -> String
+dateString model =
+    case model.toDate of
+        Nothing ->
+            "No to date here"
+
+        Just date ->
+            "the date is "
+                ++ (toString <| Date.dayOfWeek date)
+                ++ " "
+                ++ (toString <| Date.day date)
+                ++ " "
+                ++ (toString <| Date.month date)
+                ++ " "
+                ++ (toString <| Date.year date)
 
 
 imageRow : Image -> Html Msg
