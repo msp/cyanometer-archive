@@ -28,10 +28,10 @@ npm run api
 open http://localhost:4000
 
 # local API
-API_ENDPOINT=http://localhost:4000/api/locations/1/images/ npm run dev
+API_ENDPOINT=http://localhost:4000/ npm run dev
 
 # staging
-API_ENDPOINT=https://cyanometer-staging.herokuapp.com/api/locations/1/images/ npm run dev
+API_ENDPOINT=https://cyanometer-staging.herokuapp.com/ npm run dev
 ```
 
 You can also run guard to do TDD
@@ -51,7 +51,7 @@ Elm is whitespace sensitive so I've been using [elm-format](https://atom.io/pack
 #### Deploy
 
 ```
-API_ENDPOINT=https://cyanometer-staging.herokuapp.com/api/locations/1/images/ npm run deploy
+API_ENDPOINT=https://cyanometer-staging.herokuapp.com/ npm run deploy
 ```
 
 Open [https://cyanometer-archive.firebaseapp.com](https://cyanometer-archive.firebaseapp.com)
