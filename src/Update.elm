@@ -72,7 +72,7 @@ update msg model =
                         updatedModel =
                             { model
                                 | toDate = date
-                                , fromDate = Date.Extra.Duration.add Date.Extra.Duration.Month -2 date
+                                , fromDate = Date.Extra.Duration.add Date.Extra.Duration.Month -1 date
                                 , loading = True
                             }
                     in

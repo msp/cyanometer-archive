@@ -3,8 +3,9 @@ module View exposing (..)
 import Date exposing (Date, fromString, fromTime)
 import DateUtils exposing (daysInMonth, monthAsInt)
 import Html exposing (..)
-import Html.Attributes exposing (class, href, id, selected, value)
+import Html.Attributes exposing (class, href, id, selected, src, target, value)
 import Html.Events exposing (on, onClick, targetValue)
+import ImageUtils
 import Visualization.Shape as Shape exposing (defaultPieConfig, Arc)
 import Visualization.Path as Path
 import Array exposing (Array)
@@ -16,6 +17,8 @@ import Models exposing (..)
 import Routing exposing (Route(..))
 import Spinner
 import Json.Decode as Json
+import Date.Extra.Config.Config_en_gb exposing (config)
+import Date.Extra.Format as Format exposing (format, formatUtc, isoMsecOffsetFormat)
 
 
 view : Model -> Html Msg
@@ -43,30 +46,45 @@ notFoundView model =
 imagesView : Model -> Html Msg
 imagesView model =
     div [ class "animated fadeIn" ]
-        [ h1 [ class "" ] [ text ("Showing " ++ (toString (List.length model.images)) ++ " archive images between:") ]
+        [ p [ class "" ] [ text ("Showing " ++ (toString (List.length model.images)) ++ " archive images between:") ]
         , renderLocations model
         , br [] []
         , renderDate model.fromDate model "from"
         , renderDate model.toDate model "to"
-        , renderPie model
+        , div [ class "archive-content" ]
+            (List.concat
+                [ renderPie model ]
+            )
           -- , ul [ class "gel-layout" ] (List.map imageRow (List.sortBy .taken_at model.images))
         ]
 
 
-renderPie : Model -> Html Msg
+renderPie : Model -> List (Html Msg)
 renderPie model =
     let
         pieData =
             List.map (\n -> 1) (List.map .blueness_index model.images) |> Shape.pie { defaultPieConfig | outerRadius = radius }
+
+        numberOfImages =
+            case List.isEmpty model.images of
+                True ->
+                    "Sorry, no images found for your search. Please amend above and try again."
+
+                False ->
+                    ""
     in
         case model.loading of
             True ->
-                Spinner.render
+                [ Spinner.render ]
 
             False ->
-                svg [ width (toString screenWidth ++ "px"), height (toString screenHeight ++ "px") ]
+                [ p [] [ text numberOfImages ]
+                , svg [ width (toString screenWidth ++ "px"), height (toString screenHeight ++ "px") ]
                     [ annular pieData (List.map .blueness_index model.images)
                     ]
+                , div [ class "thumbnails" ]
+                    (List.map renderThumbnail model.images)
+                ]
 
 
 debug : Model -> Html Msg
@@ -75,6 +93,34 @@ debug model =
         [ div [] [ text <| toString <| model.fromDate ]
         , div [] [ text <| toString <| model.toDate ]
         ]
+
+
+renderThumbnail : Image -> Html Msg
+renderThumbnail image =
+    let
+        imageId =
+            "image-" ++ (toString image.id)
+
+        imageUrl =
+            ImageUtils.thumbnailImage (image.s3_url)
+
+        imageStyle =
+            "backgroundImage: url('"
+                ++ imageUrl
+                ++ "')"
+
+        meta =
+            Result.withDefault "?? ?? ??" <|
+                Result.map
+                    (format config config.format.dateTime)
+                    (Date.fromString image.taken_at)
+    in
+        div [ id imageId, class "thumbnail" ]
+            [ a [ href image.s3_url, target "_blank" ]
+                [ img [ src imageUrl ] []
+                , p [ class "meta" ] [ text meta ]
+                ]
+            ]
 
 
 renderLocationOption : Location -> Int -> Html Msg

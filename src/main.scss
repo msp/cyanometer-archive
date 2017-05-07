@@ -580,3 +580,16 @@ ul.autocomplete-list {
   min-width: 5%;
   font-size: smaller;
 }
+
+.thumbnail {
+  float: left;
+  margin-right: 8px;
+  margin-bottom: 15px;
+}
+
+.thumbnail .meta {
+  color: white;
+  margin-top: -50px;
+  text-align: center;
+  font-size: smaller;
+}

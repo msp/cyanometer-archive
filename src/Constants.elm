@@ -14,12 +14,12 @@ screenWidth =
 
 screenHeight : Float
 screenHeight =
-    804
+    550
 
 
 imageCount : String
 imageCount =
-    "10000"
+    "5000"
 
 
 colors : Array String
