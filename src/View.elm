@@ -3,7 +3,7 @@ module View exposing (..)
 import Date exposing (Date, fromString, fromTime)
 import DateUtils exposing (daysInMonth, monthAsInt)
 import Html exposing (..)
-import Html.Attributes exposing (class, href, id, selected, src, target, value)
+import Html.Attributes exposing (class, disabled, href, id, selected, src, target, value)
 import Html.Events exposing (on, onClick, targetValue)
 import ImageUtils
 import Visualization.Shape as Shape exposing (defaultPieConfig, Arc)
@@ -176,7 +176,7 @@ yearRange model =
 
 renderLocations : Model -> Html Msg
 renderLocations model =
-    select [ class "", onChange UpdateCurrentLocation ] (List.map (\l -> renderLocationOption l model.currentLocation.id) model.locations)
+    select [ class "", onChange UpdateCurrentLocation, disabled model.loading ] (List.map (\l -> renderLocationOption l model.currentLocation.id) model.locations)
 
 
 renderDate : Date -> Model -> String -> Html Msg
@@ -202,9 +202,9 @@ renderDate date model tag =
     in
         div []
             [ label [ class "date-select" ] [ text tag ]
-            , select [ class <| toString tag, onChange dayTagger ] (List.map (\d -> renderDateOption d d currentDay) (List.range 1 lastDayInMonth))
-            , select [ class <| toString tag, onChange monthTagger ] (List.map (\m -> renderDateOption m m currentMonth) (List.range 1 12))
-            , select [ class <| toString tag, onChange yearTagger ] (List.map (\y -> renderDateOption y y currentYear) (yearRange model))
+            , select [ class <| toString tag, disabled model.loading, onChange dayTagger ] (List.map (\d -> renderDateOption d d currentDay) (List.range 1 lastDayInMonth))
+            , select [ class <| toString tag, disabled model.loading, onChange monthTagger ] (List.map (\m -> renderDateOption m m currentMonth) (List.range 1 12))
+            , select [ class <| toString tag, disabled model.loading, onChange yearTagger ] (List.map (\y -> renderDateOption y y currentYear) (yearRange model))
             ]
 
 
