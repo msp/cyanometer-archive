@@ -6,7 +6,7 @@ require ('./images/Icon_organisation.svg')
 require('./index.html');
 
 var Elm = require('./Main.elm');
-var mountNode = document.getElementById('main');
+var mountNode = document.getElementById('archive');
 
 // The third value on embed are the initial values for incomming ports into Elm
 var app = Elm.Main.embed(mountNode, {endpoint: process.env.API_ENDPOINT});

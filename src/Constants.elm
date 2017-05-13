@@ -9,7 +9,7 @@ networkTimeoutMS =
 
 screenWidth : Float
 screenWidth =
-    1000
+    1200
 
 
 screenHeight : Float

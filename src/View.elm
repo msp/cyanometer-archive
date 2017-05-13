@@ -46,16 +46,16 @@ notFoundView model =
 imagesView : Model -> Html Msg
 imagesView model =
     div [ class "animated fadeIn" ]
-        [ p [ class "" ] [ text ("Showing " ++ (toString (List.length model.images)) ++ " archive images between:") ]
-        , renderLocations model
-        , br [] []
-        , renderDate model.fromDate model "from"
-        , renderDate model.toDate model "to"
+        [ div [ class "archive-meta" ]
+            [ label [ class "" ] [ text ("Showing " ++ (toString (List.length model.images)) ++ " archive images at") ]
+            , renderLocations model
+            , renderDate model.fromDate model "from"
+            , renderDate model.toDate model "to"
+            ]
         , div [ class "archive-content" ]
             (List.concat
                 [ renderPie model ]
             )
-          -- , ul [ class "gel-layout" ] (List.map imageRow (List.sortBy .taken_at model.images))
         ]
 
 
@@ -82,7 +82,7 @@ renderPie model =
                 , svg [ width (toString screenWidth ++ "px"), height (toString screenHeight ++ "px") ]
                     [ annular pieData (List.map .blueness_index model.images)
                     ]
-                , div [ class "thumbnails" ]
+                , div [ id "thumbnails", class "" ]
                     (List.map renderThumbnail model.images)
                 ]
 
@@ -159,9 +159,7 @@ yearRange model =
 
 renderLocations : Model -> Html Msg
 renderLocations model =
-    div []
-        [ select [ class "", onChange UpdateCurrentLocation ] (List.map (\l -> renderLocationOption l model.currentLocation.id) model.locations)
-        ]
+    select [ class "", onChange UpdateCurrentLocation ] (List.map (\l -> renderLocationOption l model.currentLocation.id) model.locations)
 
 
 renderDate : Date -> Model -> String -> Html Msg
@@ -225,7 +223,7 @@ annular arcs indicies_s =
         makeDot datum =
             path [ d dot, transform ("translate" ++ toString (Shape.centroid { datum | innerRadius = radius - 60 })) ] []
     in
-        g [ transform ("translate(" ++ toString (2 * radius + 20) ++ "," ++ toString radius ++ ")") ]
+        g [ transform ("translate(" ++ toString (2 * radius + 70) ++ "," ++ toString radius ++ ")") ]
             [ g [] <| List.indexedMap makeSlice arcs
               -- , g [] <| List.map makeDot arcs
             ]
