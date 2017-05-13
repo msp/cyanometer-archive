@@ -33,12 +33,20 @@ update msg model =
         OnListLocations (Ok newLocations) ->
             let
                 newCurrentLocation =
-                    case List.head newLocations of
+                    case
+                        List.filter (\l -> l.id == Maybe.withDefault -1 model.requestedLocationId) newLocations
+                            |> List.head
+                    of
                         Just location ->
                             location
 
                         Nothing ->
-                            model.currentLocation
+                            case List.head newLocations of
+                                Just location ->
+                                    location
+
+                                Nothing ->
+                                    model.currentLocation
             in
                 ( { model
                     | locations = newLocations

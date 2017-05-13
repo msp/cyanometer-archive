@@ -32,6 +32,24 @@ page model =
         ImagesRoute ->
             imagesView model
 
+        LocationRoute locationId ->
+            let
+                newCurrentLocation =
+                    case
+                        List.filter (\l -> (l.id |> toString) == locationId) model.locations
+                            |> List.head
+                    of
+                        Just location ->
+                            location
+
+                        Nothing ->
+                            model.currentLocation
+
+                updatedModel =
+                    { model | currentLocation = newCurrentLocation }
+            in
+                imagesView updatedModel
+
         NotFoundRoute ->
             notFoundView model
 
@@ -90,8 +108,7 @@ renderPie model =
 debug : Model -> Html Msg
 debug model =
     div []
-        [ div [] [ text <| toString <| model.fromDate ]
-        , div [] [ text <| toString <| model.toDate ]
+        [ div [] [ text <| toString <| model.requestedLocationId ]
         ]
 
 

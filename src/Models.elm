@@ -1,7 +1,8 @@
 module Models exposing (..)
 
 import Date exposing (Date, fromString, fromTime)
-import Routing
+import Routing exposing (Route(LocationRoute))
+import String exposing (toInt)
 
 
 type alias Endpoint =
@@ -15,6 +16,7 @@ type alias Model =
     , images : List Image
     , locations : List Location
     , currentLocation : Location
+    , requestedLocationId : Maybe Int
     , fromDate : Date
     , toDate : Date
     }
@@ -32,15 +34,25 @@ defaultDate =
 
 initialModel : Routing.Route -> Endpoint -> Model
 initialModel route endpoint =
-    { loading = True
-    , route = route
-    , endpoint = endpoint
-    , images = []
-    , locations = []
-    , currentLocation = newLocation
-    , fromDate = defaultDate
-    , toDate = defaultDate
-    }
+    let
+        newRequestedLocationId =
+            case route of
+                LocationRoute locationId ->
+                    Just (Result.withDefault -1 (String.toInt locationId))
+
+                _ ->
+                    Nothing
+    in
+        { loading = True
+        , route = route
+        , endpoint = endpoint
+        , images = []
+        , locations = []
+        , currentLocation = newLocation
+        , requestedLocationId = newRequestedLocationId
+        , fromDate = defaultDate
+        , toDate = defaultDate
+        }
 
 
 type alias Image =
