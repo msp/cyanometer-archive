@@ -65,20 +65,20 @@ renderPie model =
         pieData =
             List.map (\n -> 1) (List.map .blueness_index model.images) |> Shape.pie { defaultPieConfig | outerRadius = radius }
 
-        numberOfImages =
+        infoMessage =
             case List.isEmpty model.images of
                 True ->
-                    "Sorry, no images found for your search. Please amend above and try again."
+                    p [ class "no-data-found" ] [ text "Sorry, no images found for your search. Please amend above and try again." ]
 
                 False ->
-                    ""
+                    span [] []
     in
         case model.loading of
             True ->
                 [ Spinner.render ]
 
             False ->
-                [ p [] [ text numberOfImages ]
+                [ infoMessage
                 , svg [ width (toString screenWidth ++ "px"), height (toString screenHeight ++ "px") ]
                     [ annular pieData (List.map .blueness_index model.images)
                     ]
