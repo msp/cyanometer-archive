@@ -24,7 +24,7 @@ update msg model =
                 | images = newImages
                 , loading = False
               }
-            , Cmd.none
+            , updateBrowserLocation ("#location/" ++ (toString model.currentLocation.id))
             )
 
         OnListImages (Err error) ->

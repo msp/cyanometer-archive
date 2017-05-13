@@ -23,3 +23,6 @@ port scrollSourceIntoView : ScrollType -> Cmd msg
 
 
 port scrollPageTop : String -> Cmd msg
+
+
+port updateBrowserLocation : String -> Cmd msg

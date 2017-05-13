@@ -34,6 +34,11 @@ app.ports.scrollPageTop.subscribe(function(message) {
   window.scrollTo(0, 0);
 });
 
+app.ports.updateBrowserLocation.subscribe(function(location) {
+  window.location = location;
+});
+
+
 // send messages to Elm
 app.ports.sendConfirmToJs.subscribe(function(uuid) {
   var response = confirm('Are you sure you want to delete this ?');
