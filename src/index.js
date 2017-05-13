@@ -1,6 +1,7 @@
 'use strict';
 
 // Require these so they get copied to dist
+require('./common.scss');
 require('./main.scss');
 require ('./images/Icon_organisation.svg')
 require('./index.html');
