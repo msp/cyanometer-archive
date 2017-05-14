@@ -14,8 +14,8 @@ import String exposing (toInt)
 
 update : Messages.Msg -> Model -> ( Model, Cmd Messages.Msg )
 update msg model =
-    case Debug.log "========= MAIN ========= update" msg of
-        --    case msg of
+    --    case Debug.log "========= MAIN ========= update" msg of
+    case msg of
         UpdateImages ->
             ( model, listImages model )
 
