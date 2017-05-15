@@ -20,3 +20,4 @@ type Msg
     | UpdateFromDateYear String
     | UpdateCurrentLocation String
     | UpdateImages
+    | ResizeWindow Int Int

@@ -1,6 +1,6 @@
 module Update exposing (..)
 
-import Commands exposing (defaultToDate, listImages)
+import Commands exposing (defaultToDate, initialSizeCmd, listImages)
 import Date
 import Date.Extra.Duration
 import DateUtils exposing (monthAsInt)
@@ -53,7 +53,7 @@ update msg model =
                     , currentLocation = newCurrentLocation
                     , loading = False
                   }
-                , defaultToDate
+                , Cmd.batch [ initialSizeCmd, defaultToDate ]
                 )
 
         OnListLocations (Err error) ->
@@ -217,6 +217,9 @@ update msg model =
                 ( updatedModel
                 , listImages updatedModel
                 )
+
+        ResizeWindow w h ->
+            ( { model | height = h, width = w }, Cmd.none )
 
         NoOp ->
             ( model, Cmd.none )

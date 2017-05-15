@@ -25,6 +25,16 @@ $highlight-color: #f4d442;
   //border: 1px solid red;
 }
 
+svg {
+  //border: 1px solid green;
+  width: 100%;
+  heigth: 100%;
+
+  g {
+    //border: 1px solid blue;
+  }
+}
+
 #thumbnails {
   //border: 1px solid green;
   margin-top: 20px;

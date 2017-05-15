@@ -10,7 +10,7 @@ import Visualization.Shape as Shape exposing (defaultPieConfig, Arc)
 import Visualization.Path as Path
 import Array exposing (Array)
 import Svg exposing (Svg, svg, g, path)
-import Svg.Attributes exposing (transform, d, style, dy, width, height, textAnchor)
+import Svg.Attributes exposing (d, dy, height, style, textAnchor, transform, viewBox, width)
 import Constants exposing (..)
 import Messages exposing (Msg(..))
 import Models exposing (..)
@@ -81,7 +81,7 @@ renderPie : Model -> List (Html Msg)
 renderPie model =
     let
         pieData =
-            List.map (\n -> 1) (List.map .blueness_index model.images) |> Shape.pie { defaultPieConfig | outerRadius = radius }
+            List.map (\n -> 1) (List.map .blueness_index model.images) |> Shape.pie { defaultPieConfig | outerRadius = (radius model) }
 
         infoMessage =
             case List.isEmpty model.images of
@@ -97,8 +97,8 @@ renderPie model =
 
             False ->
                 [ infoMessage
-                , svg [ width (toString screenWidth ++ "px"), height (toString screenHeight ++ "px") ]
-                    [ annular pieData (List.map .blueness_index model.images)
+                , svg [ viewBox ("-2 -2 " ++ (toString model.width) ++ " " ++ (toString model.height)) ]
+                    [ annular model pieData (List.map .blueness_index model.images)
                     ]
                 , div [ id "thumbnails", class "" ]
                     (List.map renderThumbnail model.images)
@@ -108,7 +108,7 @@ renderPie model =
 debug : Model -> Html Msg
 debug model =
     div []
-        [ div [] [ text <| toString <| model.requestedLocationId ]
+        [ div [] [ text <| (toString <| model.width) ++ "/" ++ (toString <| model.height) ]
         ]
 
 
@@ -218,9 +218,9 @@ imageRow image =
         ]
 
 
-radius : Float
-radius =
-    min (screenWidth / 2) screenHeight / 2 - 10
+radius : Model -> Float
+radius model =
+    min ((model.width |> toFloat) / 2) (model.height |> toFloat) / 2 - 10
 
 
 dot : String
@@ -228,19 +228,19 @@ dot =
     Path.begin |> Path.moveTo 5 5 |> Path.arc 0 0 5 0 (2 * pi) False |> Path.toAttrString
 
 
-annular : List Arc -> List String -> Svg msg
-annular arcs indicies_s =
+annular : Model -> List Arc -> List String -> Svg msg
+annular model arcs indicies_s =
     let
         indicies =
             List.map (\i -> Result.withDefault 0 (String.toInt i)) indicies_s
 
         makeSlice index datum =
-            path [ d (Shape.arc { datum | innerRadius = radius - 80 }), style ("fill:" ++ (Maybe.withDefault "#ccc" <| Array.get (Maybe.withDefault 1 <| Array.get index (Array.fromList indicies)) Constants.colors) ++ ";") ] []
+            path [ d (Shape.arc { datum | innerRadius = (radius model) - 100 }), style ("fill:" ++ (Maybe.withDefault "#ccc" <| Array.get (Maybe.withDefault 1 <| Array.get index (Array.fromList indicies)) Constants.colors) ++ ";") ] []
 
         makeDot datum =
-            path [ d dot, transform ("translate" ++ toString (Shape.centroid { datum | innerRadius = radius - 60 })) ] []
+            path [ d dot, transform ("translate" ++ toString (Shape.centroid { datum | innerRadius = (radius model) - 60 })) ] []
     in
-        g [ transform ("translate(" ++ toString (2 * radius + 70) ++ "," ++ toString radius ++ ")") ]
+        g [ transform ("translate(" ++ toString (2 * (radius model) + 8) ++ "," ++ toString (radius model) ++ ")") ]
             [ g [] <| List.indexedMap makeSlice arcs
               -- , g [] <| List.map makeDot arcs
             ]

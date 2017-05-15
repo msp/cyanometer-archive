@@ -8,6 +8,7 @@ import Update exposing (update)
 import Commands exposing (defaultToDate, listImages, listLocations)
 import Routing exposing (Route)
 import Navigation exposing (Location)
+import Window exposing (..)
 
 
 init : Flags -> Location -> ( Model, Cmd Msg )
@@ -24,7 +25,7 @@ init flags location =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    Window.resizes (\{ height, width } -> ResizeWindow width height)
 
 
 type alias Flags =

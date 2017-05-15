@@ -3,6 +3,7 @@ module Models exposing (..)
 import Date exposing (Date, fromString, fromTime)
 import Routing exposing (Route(LocationRoute))
 import String exposing (toInt)
+import Constants
 
 
 type alias Endpoint =
@@ -19,6 +20,8 @@ type alias Model =
     , requestedLocationId : Maybe Int
     , fromDate : Date
     , toDate : Date
+    , width : Int
+    , height : Int
     }
 
 
@@ -52,6 +55,8 @@ initialModel route endpoint =
         , requestedLocationId = newRequestedLocationId
         , fromDate = defaultDate
         , toDate = defaultDate
+        , width = 0
+        , height = 0
         }
 
 

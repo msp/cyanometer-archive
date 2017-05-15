@@ -11,6 +11,8 @@ import Messages exposing (Msg(..))
 import Models exposing (Image, Location, Model)
 import Regex
 import Task
+import Window
+import Task
 
 
 defaultToDate : Cmd Msg
@@ -108,3 +110,13 @@ locationDecoder =
         |: (field "place" Decode.string)
         |: (field "country" Decode.string)
         |: (field "city" Decode.string)
+
+
+initialSizeCmd : Cmd Msg
+initialSizeCmd =
+    Task.perform sizeToMsg Window.size
+
+
+sizeToMsg : Window.Size -> Msg
+sizeToMsg size =
+    ResizeWindow size.width size.height
