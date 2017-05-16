@@ -54,7 +54,6 @@ svg {
     font-size: 16px;
     font-weight: normal;
   }
-
 }
 
 select {
@@ -134,4 +133,214 @@ label {
 .highlight {
   animation: highlight 2s;
   animation-iteration-count: 1;
+}
+
+/* iPhone 6 Portrait */
+@media screen and (min-width : 375px) and (max-width : 667px) {
+  .archive-meta {
+    position: relative;
+    // border: 1px solid blue;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  select {
+    font-size: 16px;
+  }
+
+  select.location {
+    width: 100%
+  }
+  select.date {
+    width: 33.3%
+  }
+
+  #thumbnails {
+    margin-top: -345px;
+
+    .thumbnail {
+      width: 355px;
+      height: 190px;
+
+      img {
+        width: 355px;
+        // max-width: inherit;
+      }
+    }
+
+    .thumbnail .meta {
+      // font-size: 16px;
+    }
+  }
+}
+
+/* iPhone 6 Landscape */
+@media only screen
+  and (min-device-width : 375px)
+  and (max-device-width : 667px)
+  and (orientation : landscape) {
+
+  #thumbnails {
+    margin-top: 0px;
+
+    .thumbnail {
+      width: 645px;
+      height: 350px;
+      // border: 1px solid red;
+
+      img {
+        width: 665px;
+        // max-width: inherit;
+      }
+    }
+  }
+}
+
+/* ----------- iPad 3 and 4 ----------- */
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+  .archive-meta {
+    position: relative;
+    border: 0px solid blue;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  select {
+    font-size: 16px;
+  }
+
+  select.location {
+    width: 100%
+  }
+  select.date {
+    width: 33.3%
+  }
+
+  #thumbnails {
+    margin-top: -485px;
+    border: 0px solid red;
+
+    .thumbnail {
+      margin-right: 3px;
+      margin-bottom: 4px;
+      img {
+      }
+    }
+
+    .thumbnail .meta {
+    }
+  }
+}
+
+/* Portrait */
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (orientation: portrait)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+}
+
+/* Landscape */
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (orientation: landscape)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+  #thumbnails {
+    margin-top: -185px;
+    border: 0px solid red;
+
+    .thumbnail {
+      margin-right: 16px;
+      margin-bottom: 16px;
+      img {
+      }
+    }
+
+    .thumbnail .meta {
+    }
+  }
+}
+
+/* ----------- iPad mini ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (-webkit-min-device-pixel-ratio: 1) {
+
+  .archive-meta {
+    position: relative;
+    border: 0px solid blue;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  select {
+    font-size: 16px;
+  }
+
+  select.location {
+    width: 100%
+  }
+  select.date {
+    width: 33.3%
+  }
+
+  #thumbnails {
+    margin-top: -485px;
+    border: 0px solid red;
+
+    .thumbnail {
+      margin-right: 3px;
+      margin-bottom: 4px;
+      img {
+      }
+    }
+
+    .thumbnail .meta {
+    }
+  }
+
+}
+
+/* Portrait */
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (orientation: portrait)
+  and (-webkit-min-device-pixel-ratio: 1) {
+
+}
+
+/* Landscape */
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (orientation: landscape)
+  and (-webkit-min-device-pixel-ratio: 1) {
+
+  #thumbnails {
+    margin-top: -185px;
+    border: 0px solid red;
+
+    .thumbnail {
+      margin-right: 16px;
+      margin-bottom: 16px;
+      img {
+      }
+    }
+
+    .thumbnail .meta {
+    }
+  }
+
 }

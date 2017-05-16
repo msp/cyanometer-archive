@@ -176,7 +176,7 @@ yearRange model =
 
 renderLocations : Model -> Html Msg
 renderLocations model =
-    select [ class "", onChange UpdateCurrentLocation, disabled model.loading ] (List.map (\l -> renderLocationOption l model.currentLocation.id) model.locations)
+    select [ class "location", onChange UpdateCurrentLocation, disabled model.loading ] (List.map (\l -> renderLocationOption l model.currentLocation.id) model.locations)
 
 
 renderDate : Date -> Model -> String -> Html Msg
@@ -202,9 +202,9 @@ renderDate date model tag =
     in
         div []
             [ label [ class "date-select" ] [ text tag ]
-            , select [ class <| toString tag, disabled model.loading, onChange dayTagger ] (List.map (\d -> renderDateOption d d currentDay) (List.range 1 lastDayInMonth))
-            , select [ class <| toString tag, disabled model.loading, onChange monthTagger ] (List.map (\m -> renderDateOption m m currentMonth) (List.range 1 12))
-            , select [ class <| toString tag, disabled model.loading, onChange yearTagger ] (List.map (\y -> renderDateOption y y currentYear) (yearRange model))
+            , select [ class ("date " ++ toString tag), disabled model.loading, onChange dayTagger ] (List.map (\d -> renderDateOption d d currentDay) (List.range 1 lastDayInMonth))
+            , select [ class ("date " ++ toString tag), disabled model.loading, onChange monthTagger ] (List.map (\m -> renderDateOption m m currentMonth) (List.range 1 12))
+            , select [ class ("date " ++ toString tag), disabled model.loading, onChange yearTagger ] (List.map (\y -> renderDateOption y y currentYear) (yearRange model))
             ]
 
 
