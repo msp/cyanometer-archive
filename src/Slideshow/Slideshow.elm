@@ -1,9 +1,9 @@
 module Slideshow.Slideshow exposing (..)
 
-import Html exposing (Html, button, div, img, p, text)
-import Html.Attributes exposing (class, classList, id, src, title)
-import Html.Events exposing (onClick, on)
-import Messages exposing (Msg(Begin, End, ImageLoaded, Next, Play, Prev, ShowSlideshow, Stop))
+import Html exposing (Html, br, button, div, img, input, p, span, text)
+import Html.Attributes as HTA exposing (class, classList, id, src, title, type_, value)
+import Html.Events exposing (on, onClick, onInput)
+import Messages exposing (Msg(Begin, End, ImageLoaded, Next, Play, Prev, ShowSlideshow, Stop, UpdateRate))
 import Models exposing (Model)
 import Json.Decode as JD
 import Spinner
@@ -112,6 +112,21 @@ view model =
         playedCounter =
             (toString model.slideshow.state) ++ "/" ++ (toString <| List.length model.images)
 
+        location =
+            model.currentLocation
+
+        locationString =
+            location.country ++ ", " ++ location.city
+
+        meta =
+            div [ class "meta" ]
+                [ p []
+                    [ span [] [ text <| locationString ]
+                    , br [] []
+                    , span [] [ text <| Models.formattedDate currentImage ]
+                    ]
+                ]
+
         transport =
             let
                 ( msg, hint ) =
@@ -122,11 +137,23 @@ view model =
                         False ->
                             ( Play, "play" )
             in
-                button [ onClick msg, title hint ] [ text playedCounter ]
+                button [ class "play-stop", onClick msg, title hint ] [ text playedCounter ]
+
+        rate =
+            input
+                [ type_ "range"
+                , class "rate"
+                , HTA.min "1"
+                , HTA.max "3"
+                , value (toString model.slideshow.rate)
+                , onInput UpdateRate
+                ]
+                [ text <| toString model.slideshow.rate ]
     in
         div [ class "slideshow" ]
             [ div [ class "transport" ]
-                [ button [ onClick Begin, title "begin" ] [ text "<<" ]
+                [ rate
+                , button [ onClick Begin, title "begin" ] [ text "<<" ]
                 , button [ onClick Prev, title "prev" ] [ text "<" ]
                 , transport
                 , button [ onClick Next, title "next" ] [ text ">" ]
@@ -138,6 +165,7 @@ view model =
                   slide
                 , nextSlide
                 ]
+            , meta
             ]
 
 
@@ -150,7 +178,7 @@ renderSlideshowButton model =
                     ( "x", False, "close" )
 
                 False ->
-                    ( "Slideshow", True, "start a slideshow of images" )
+                    ( "Time-lapse", True, "start a time-lapse of sky images" )
     in
         button [ id "slideshow-button", title hint, onClick <| ShowSlideshow playState ] [ text slideshowButtonText ]
 

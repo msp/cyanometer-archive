@@ -7,6 +7,7 @@ type alias Model =
     , imageUrl : Maybe String
     , imageLoaded : Bool
     , message : String
+    , rate : Int
     }
 
 
@@ -17,4 +18,5 @@ initialModel =
     , imageUrl = Nothing
     , imageLoaded = False
     , message = "Nothing loaded yet"
+    , rate = 1
     }

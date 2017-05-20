@@ -5,6 +5,8 @@ import Routing exposing (Route(LocationRoute))
 import Slideshow.Models
 import String exposing (toInt)
 import Time exposing (Time)
+import Date.Extra.Config.Config_en_gb exposing (config)
+import Date.Extra.Format as Format exposing (format, formatUtc, isoMsecOffsetFormat)
 
 
 type alias Endpoint =
@@ -99,3 +101,11 @@ newLocation =
     , country = ""
     , city = ""
     }
+
+
+formattedDate : Image -> String
+formattedDate image =
+    Result.withDefault "?? ?? ??" <|
+        Result.map
+            (format config config.format.dateTime)
+            (Date.fromString image.taken_at)

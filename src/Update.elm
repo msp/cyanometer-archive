@@ -22,7 +22,7 @@ update msg model =
 
         OnListImages (Ok newImages) ->
             ( { model
-                | images = newImages
+                | images = List.sortBy .taken_at newImages
                 , loading = False
               }
             , updateBrowserLocation ("#location/" ++ (toString model.currentLocation.id))
@@ -231,6 +231,7 @@ update msg model =
                     { currentSlideshow
                         | play = bool
                         , state = 1
+                        , rate = 1
                     }
             in
                 ( { model | renderSlideshow = bool, slideshow = updatedSlideshow }, Cmd.none )
@@ -301,6 +302,22 @@ update msg model =
 
                 False ->
                     ( { model | currentTick = newTime }, Cmd.none )
+
+        UpdateRate newRate ->
+            let
+                currentSlideshow =
+                    model.slideshow
+
+                updatedSlideshow =
+                    { currentSlideshow
+                        | rate = String.toInt newRate |> Result.withDefault 1
+                    }
+            in
+                ( { model
+                    | slideshow = updatedSlideshow
+                  }
+                , Cmd.none
+                )
 
         NoOp ->
             ( model, Cmd.none )

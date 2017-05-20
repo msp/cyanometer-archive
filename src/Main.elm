@@ -28,7 +28,7 @@ subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.batch
         [ Window.resizes (\{ height, width } -> ResizeWindow width height)
-        , Time.every (1 * second) Tick
+        , Time.every (second / (toFloat model.slideshow.rate)) Tick
         ]
 
 

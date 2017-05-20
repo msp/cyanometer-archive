@@ -73,6 +73,10 @@ label {
 }
 
 #archive {
+  a:hover {
+    text-decoration: none;
+  }
+
   margin-top: 40px;
 
   button {
@@ -93,7 +97,6 @@ label {
 
     button {
       background-color: transparent;
-      text-transform: uppercase;
       border: 1px solid transparent;
 
       &:hover {
@@ -106,6 +109,16 @@ label {
       top: 0px;
       right: 0px;
       font-weight: bold;
+    }
+
+    .play-stop {
+      min-width: 15%;
+    }
+
+    .rate {
+      position: absolute;
+      top: 24px;
+      left: 24px;
     }
   }
 }
@@ -139,6 +152,18 @@ label {
     top: 0px;
     left: 0px;
   }
+
+  .meta {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    border: 0px solid red;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    font-size: smaller;
+  }
+
 }
 
 // Utils
@@ -224,6 +249,11 @@ label {
       width: 355px;
       button#slideshow-button {
         width: 355px;
+      }
+    }
+    .transport {
+      .rate {
+        display: none;
       }
     }
   }

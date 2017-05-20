@@ -17,8 +17,6 @@ import Models exposing (..)
 import Routing exposing (Route(..))
 import Spinner
 import Json.Decode as Json
-import Date.Extra.Config.Config_en_gb exposing (config)
-import Date.Extra.Format as Format exposing (format, formatUtc, isoMsecOffsetFormat)
 import Slideshow.Slideshow as Slideshow
 
 
@@ -143,17 +141,11 @@ renderThumbnail image =
             "backgroundImage: url('"
                 ++ imageUrl
                 ++ "')"
-
-        meta =
-            Result.withDefault "?? ?? ??" <|
-                Result.map
-                    (format config config.format.dateTime)
-                    (Date.fromString image.taken_at)
     in
         div [ id imageId, class "thumbnail" ]
             [ a [ href image.s3_url, target "_blank" ]
                 [ img [ src imageUrl ] []
-                , p [ class "meta" ] [ text meta ]
+                , p [ class "meta" ] [ text <| Models.formattedDate image ]
                 ]
             ]
 

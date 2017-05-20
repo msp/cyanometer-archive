@@ -29,5 +29,6 @@ type Msg
     | End
     | Play
     | Stop
+    | UpdateRate String
     | ImageLoaded String
     | Tick Time
