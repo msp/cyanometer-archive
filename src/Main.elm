@@ -9,6 +9,7 @@ import Commands exposing (defaultToDate, listImages, listLocations)
 import Routing exposing (Route)
 import Navigation exposing (Location)
 import Window exposing (..)
+import Time exposing (Time, second)
 
 
 init : Flags -> Location -> ( Model, Cmd Msg )
@@ -25,7 +26,10 @@ init flags location =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Window.resizes (\{ height, width } -> ResizeWindow width height)
+    Sub.batch
+        [ Window.resizes (\{ height, width } -> ResizeWindow width height)
+        , Time.every (1 * second) Tick
+        ]
 
 
 type alias Flags =

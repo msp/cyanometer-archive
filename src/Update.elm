@@ -9,6 +9,7 @@ import Models exposing (Model)
 import Ports exposing (..)
 import Routing exposing (parseLocation)
 import Http
+import Slideshow.Slideshow as Slideshow
 import String exposing (toInt)
 
 
@@ -220,6 +221,86 @@ update msg model =
 
         ResizeWindow w h ->
             ( { model | height = h, width = w }, Cmd.none )
+
+        ShowSlideshow bool ->
+            let
+                currentSlideshow =
+                    model.slideshow
+
+                updatedSlideshow =
+                    { currentSlideshow
+                        | play = bool
+                        , state = 1
+                    }
+            in
+                ( { model | renderSlideshow = bool, slideshow = updatedSlideshow }, Cmd.none )
+
+        Begin ->
+            Slideshow.update msg model
+
+        End ->
+            Slideshow.update msg model
+
+        Next ->
+            Slideshow.update msg model
+
+        Prev ->
+            Slideshow.update msg model
+
+        Play ->
+            let
+                currentSlideshow =
+                    model.slideshow
+
+                updatedSlideshow =
+                    { currentSlideshow
+                        | play = True
+                    }
+            in
+                ( { model | slideshow = updatedSlideshow }, Cmd.none )
+
+        Stop ->
+            let
+                currentSlideshow =
+                    model.slideshow
+
+                updatedSlideshow =
+                    { currentSlideshow
+                        | play = False
+                    }
+            in
+                ( { model | slideshow = updatedSlideshow }, Cmd.none )
+
+        ImageLoaded imgSrc ->
+            let
+                currentSlideshow =
+                    model.slideshow
+
+                updatedSlideshow =
+                    { currentSlideshow
+                        | message = "Image has been loaded: " ++ imgSrc
+                        , imageLoaded = True
+                    }
+            in
+                ( { model
+                    | slideshow = updatedSlideshow
+                  }
+                , Cmd.none
+                )
+
+        Tick newTime ->
+            case model.slideshow.play of
+                True ->
+                    case model.slideshow.imageLoaded of
+                        True ->
+                            { model | currentTick = newTime }
+                                |> update (Next)
+
+                        False ->
+                            ( { model | currentTick = newTime }, Cmd.none )
+
+                False ->
+                    ( { model | currentTick = newTime }, Cmd.none )
 
         NoOp ->
             ( model, Cmd.none )

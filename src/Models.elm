@@ -2,8 +2,9 @@ module Models exposing (..)
 
 import Date exposing (Date, fromString, fromTime)
 import Routing exposing (Route(LocationRoute))
+import Slideshow.Models
 import String exposing (toInt)
-import Constants
+import Time exposing (Time)
 
 
 type alias Endpoint =
@@ -22,6 +23,9 @@ type alias Model =
     , toDate : Date
     , width : Int
     , height : Int
+    , renderSlideshow : Bool
+    , slideshow : Slideshow.Models.Model
+    , currentTick : Time
     }
 
 
@@ -57,6 +61,9 @@ initialModel route endpoint =
         , toDate = defaultDate
         , width = 0
         , height = 0
+        , renderSlideshow = False
+        , slideshow = Slideshow.Models.initialModel
+        , currentTick = 0
         }
 
 

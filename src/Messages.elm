@@ -4,6 +4,7 @@ import Date exposing (Date)
 import Models exposing (Image, Location)
 import Http
 import Navigation
+import Time exposing (Time)
 
 
 type Msg
@@ -21,3 +22,12 @@ type Msg
     | UpdateCurrentLocation String
     | UpdateImages
     | ResizeWindow Int Int
+    | ShowSlideshow Bool
+    | Next
+    | Prev
+    | Begin
+    | End
+    | Play
+    | Stop
+    | ImageLoaded String
+    | Tick Time

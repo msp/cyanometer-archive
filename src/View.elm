@@ -19,6 +19,7 @@ import Spinner
 import Json.Decode as Json
 import Date.Extra.Config.Config_en_gb exposing (config)
 import Date.Extra.Format as Format exposing (format, formatUtc, isoMsecOffsetFormat)
+import Slideshow.Slideshow as Slideshow
 
 
 view : Model -> Html Msg
@@ -63,18 +64,30 @@ notFoundView model =
 
 imagesView : Model -> Html Msg
 imagesView model =
-    div [ class "animated fadeIn" ]
-        [ div [ class "archive-meta" ]
-            [ label [ class "" ] [ text ("Showing " ++ (toString (List.length model.images)) ++ " archive images at") ]
-            , renderLocations model
-            , renderDate model.fromDate model "from"
-            , renderDate model.toDate model "to"
-            ]
-        , div [ class "archive-content" ]
+    let
+        pageContent =
+            case model.renderSlideshow of
+                True ->
+                    [ Slideshow.view model ]
+
+                False ->
+                    [ div [ class "archive-meta" ]
+                        [ label [ class "" ] [ text ("Showing " ++ (toString (List.length model.images)) ++ " archive images at") ]
+                        , renderLocations model
+                        , renderDate model.fromDate model "from"
+                        , renderDate model.toDate model "to"
+                        ]
+                    , div [ class "archive-content" ]
+                        (List.concat
+                            [ renderPie model ]
+                        )
+                    ]
+    in
+        div [ class "animated fadeIn" ]
             (List.concat
-                [ renderPie model ]
+                [ pageContent
+                ]
             )
-        ]
 
 
 renderPie : Model -> List (Html Msg)
@@ -101,7 +114,12 @@ renderPie model =
                     [ annular model pieData (List.map .blueness_index model.images)
                     ]
                 , div [ id "thumbnails", class "" ]
-                    (List.map renderThumbnail model.images)
+                    [ div [ class "slideshow-button" ]
+                        [ Slideshow.renderSlideshowButton model
+                        ]
+                    , div []
+                        (List.map renderThumbnail model.images)
+                    ]
                 ]
 
 
