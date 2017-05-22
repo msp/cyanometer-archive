@@ -185,7 +185,7 @@ update msg model =
                     let
                         updatedModel =
                             { model
-                                | toDate = DateUtils.assemble (Date.day model.toDate) (monthAsInt <| Date.month model.fromDate) year
+                                | toDate = DateUtils.assemble (Date.day model.toDate) (monthAsInt <| Date.month model.toDate) year
                                 , loading = True
                             }
                     in
