@@ -80,7 +80,8 @@ update msg model =
                     let
                         updatedModel =
                             { model
-                                | toDate = date
+                                | today = date
+                                , toDate = date
                                 , fromDate = Date.Extra.Duration.add Date.Extra.Duration.Month -1 date
                                 , loading = True
                             }

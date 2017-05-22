@@ -21,6 +21,7 @@ type alias Model =
     , locations : List Location
     , currentLocation : Location
     , requestedLocationId : Maybe Int
+    , today : Date
     , fromDate : Date
     , toDate : Date
     , width : Int
@@ -59,6 +60,7 @@ initialModel route endpoint =
         , locations = []
         , currentLocation = newLocation
         , requestedLocationId = newRequestedLocationId
+        , today = defaultDate
         , fromDate = defaultDate
         , toDate = defaultDate
         , width = 0

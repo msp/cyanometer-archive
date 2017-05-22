@@ -181,7 +181,7 @@ renderDateOption val label current =
 
 yearRange : Model -> List Int
 yearRange model =
-    List.range (Date.year <| Models.defaultDate) (Date.year <| model.toDate)
+    List.range (Date.year <| Models.defaultDate) (Date.year <| model.today)
 
 
 renderLocations : Model -> Html Msg
