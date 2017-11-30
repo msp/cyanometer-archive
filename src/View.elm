@@ -245,7 +245,7 @@ annular model arcs indicies_s =
             List.map (\i -> Result.withDefault 0 (String.toInt i)) indicies_s
 
         makeSlice index datum =
-            path [ d (Shape.arc { datum | innerRadius = (radius model) - 100 }), style ("fill:" ++ (Maybe.withDefault "#ccc" <| Array.get (Maybe.withDefault 1 <| Array.get index (Array.fromList indicies)) Constants.colors) ++ ";") ] []
+            path [ d (Shape.arc { datum | innerRadius = (radius model) - (toFloat (model.width) / 15) }), style ("fill:" ++ (Maybe.withDefault "#ccc" <| Array.get (Maybe.withDefault 1 <| Array.get index (Array.fromList indicies)) Constants.colors) ++ ";") ] []
 
         makeDot datum =
             path [ d dot, transform ("translate" ++ toString (Shape.centroid { datum | innerRadius = (radius model) - 60 })) ] []
