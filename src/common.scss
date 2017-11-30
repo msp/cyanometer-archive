@@ -40,8 +40,6 @@ nav {
 }
 
 .logo {
-  width: 400px;
-  /*border: 1px solid red;*/
   margin: 0px auto;
   padding: 0px;
   display: block;
@@ -49,8 +47,8 @@ nav {
 }
 
 .logo img {
-  width: 400px;
   /*border: 1px solid blue;*/
+  width: 400px;
   margin: 0px auto;
   padding: 0px;
 
@@ -108,7 +106,6 @@ hr.grey-hr {
     font-size: 15pt;
     /*letter-spacing: 25px*/
     line-height: 22pt;
-    border: 0px solid red;
   }
 
   .section-title {
