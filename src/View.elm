@@ -3,7 +3,7 @@ module View exposing (..)
 import Date exposing (Date, fromString, fromTime)
 import DateUtils exposing (daysInMonth, monthAsInt)
 import Html exposing (..)
-import Html.Attributes exposing (class, disabled, href, id, selected, src, target, value)
+import Html.Attributes exposing (class, disabled, href, id, selected, src, target, value, attribute)
 import Html.Events exposing (on, onClick, targetValue)
 import ImageUtils
 import Visualization.Shape as Shape exposing (defaultPieConfig, Arc)
@@ -74,6 +74,7 @@ imagesView model =
                         , renderLocations model
                         , renderDate model.fromDate model "from"
                         , renderDate model.toDate model "to"
+                          -- , debug model
                         ]
                     , div [ class "archive-content" ]
                         (List.concat
@@ -108,8 +109,12 @@ renderPie model =
 
             False ->
                 [ infoMessage
-                , svg [ viewBox ("-2 -2 " ++ (toString model.width) ++ " " ++ (toString model.height)) ]
-                    [ annular model pieData (List.map .blueness_index model.images)
+                , div [ class "svg-wrapper" ]
+                    [ svg
+                        [ viewBox ("-1 -1 " ++ (toString model.width) ++ " " ++ (toString (model.height)))
+                        ]
+                        [ annular model pieData (List.map .blueness_index model.images)
+                        ]
                     ]
                 , div [ id "thumbnails", class "" ]
                     [ div [ class "slideshow-button" ]
@@ -121,10 +126,18 @@ renderPie model =
                 ]
 
 
+
+-- iPhone Pie layout issue:
+--
+-- The Window height is reported incorrectly on load until you scroll down, then it jumps up a bit, hence the pie redraws
+-- On mobile we remove the abs position of the menun dropdowns so the page flows nicely. We have to reduce that amount from the SVG height calc.
+-- Alternatively set a negative margin on the thumbs (current 'solution' )
+
+
 debug : Model -> Html Msg
 debug model =
     div []
-        [ div [] [ text <| (toString <| model.width) ++ "/" ++ (toString <| model.height) ]
+        [ div [] [ text <| (toString <| model.width) ++ "/" ++ (toString <| model.height) ++ " radius - " ++ (toString <| radius model) ]
         ]
 
 

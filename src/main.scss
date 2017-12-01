@@ -17,26 +17,21 @@ $highlight-color: #f4d442;
 // APP
 .archive-meta {
   position: absolute;
-  //border: 1px solid blue;
+  border: 0px solid red;
   width: 33%;
 }
 
 .archive-content {
-  //border: 1px solid red;
 }
 
 svg {
-  //border: 1px solid green;
   width: 100%;
-  heigth: 100%;
-
-  g {
-    //border: 1px solid blue;
-  }
 }
 
+
+
 #thumbnails {
-  //border: 1px solid green;
+  border: 0px solid red;
   margin-top: 20px;
 
   .thumbnail {
@@ -171,8 +166,15 @@ label {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 0px solid red;
+  border: 0px dashed red;
   height: 500px;
+}
+
+.svg-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0px dashed green;
 }
 
 .hidden {
@@ -221,7 +223,11 @@ label {
   animation-iteration-count: 1;
 }
 
-@mixin mobile () {
+@mixin mobile ($hack: -335px) {
+  .center-aligner {
+    height: 150px;
+  }
+
   .archive-meta {
     position: relative;
     width: 100%;
@@ -240,6 +246,8 @@ label {
   }
 
   #archive {
+    margin-top: 10px;
+
     button {
       padding: 0 2rem;
     }
@@ -257,8 +265,9 @@ label {
     }
   }
 
+
   #thumbnails {
-    margin-top: -345px;
+    margin-top: $hack;
     overflow: hidden;
 
     .thumbnail {
@@ -298,7 +307,7 @@ label {
   and (max-device-width: 568px)
   and (-webkit-min-device-pixel-ratio: 2) {
 
-  @include mobile();
+  @include mobile(-235px);
 }
 
 /* Portrait */
